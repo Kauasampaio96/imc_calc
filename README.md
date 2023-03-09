@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="to_readme.gif">
+  <img src="to_readme_imc.gif">
 </p>
 
 <h2>👨‍💻 Sobre o projeto</h2>
