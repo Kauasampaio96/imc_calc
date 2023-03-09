@@ -10,9 +10,10 @@ form.addEventListener('submit', (e) => {
   const peso = inputPeso.value
   const altura = inputAltura.value
 
+  const pesobrFormat = brFormat(peso)
   const alturabrFormat = brFormat(altura)
 
-  if(!peso){
+  if(!pesobrFormat){
     setResultado('Peso Inválido', false)
     return
   }
@@ -22,7 +23,7 @@ form.addEventListener('submit', (e) => {
     return
   }
 
-  const imc = getImc(peso, alturabrFormat)
+  const imc = getImc(pesobrFormat, alturabrFormat)
   const nivelImc = getNivelImc(imc)
 
   const msg = `Seu IMC é ${imc} (${nivelImc}).`
@@ -40,6 +41,7 @@ function brFormat(valor){
   else {
     return Number(valor)
   }
+
 }
 
 function getNivelImc(imc){
