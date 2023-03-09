@@ -7,20 +7,22 @@ form.addEventListener('submit', (e) => {
   const inputPeso = e.target.querySelector('#peso')
   const inputAltura = e.target.querySelector('#altura')
   
-  const peso = Number(inputPeso.value)
-  const altura = Number(inputAltura.value)
+  const peso = inputPeso.value
+  const altura = inputAltura.value
+
+  const alturabrFormat = brFormat(altura)
 
   if(!peso){
     setResultado('Peso Inválido', false)
     return
   }
 
-  if(!altura){
+  if(!alturabrFormat){
     setResultado('Altura Inválida', false)
     return
   }
 
-  const imc = getImc(peso, altura)
+  const imc = getImc(peso, alturabrFormat)
   const nivelImc = getNivelImc(imc)
 
   const msg = `Seu IMC é ${imc} (${nivelImc}).`
@@ -28,6 +30,17 @@ form.addEventListener('submit', (e) => {
   setResultado(msg, true)
 })
 
+
+function brFormat(valor){
+
+  if (valor.includes(',')){
+    var numero = valor.replace(',', '.')
+    return Number(numero)
+  }
+  else {
+    return Number(valor)
+  }
+}
 
 function getNivelImc(imc){
   const nivel = ['Abaixo do peso', 'Peso normal', 'Sobrepeso', 'Obesidade Grau 1', 'Obesidade grau 2', 'Obesidade grau 3']
@@ -68,7 +81,7 @@ function setResultado(msg, isValid){
   else {
     p.classList.add('bad')
   }
-  
+
   p.innerHTML = msg
   resultado.appendChild(p)
 
